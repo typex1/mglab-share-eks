@@ -7,7 +7,7 @@
 
 This repository provides an export of various AWS demonstrations an instructor may leverage to deliver a course about running EKS on AWS.
 
-The demos in this repository are provide as is with **NO WARRANTIES** explicit or implied.  It is the consumers responsibility for costs & management of ANY & ALL provisioned resources in the consumers own AWS account(s) when using these demos.
+The demos in this repository are provided as is with **NO WARRANTIES** explicit or implied.  It is the consumers responsibility for costs & management of ANY & ALL provisioned resources in the consumers own AWS account(s) when using these demos.
 
 
 ### Whats in it?
