@@ -52,8 +52,18 @@ fi
 ```
 - From your bash capable mac/pc, create/update a Cloud9 (C9) Instance within the new VPC. You will run all subsequent demo steps after this one from a console on the C9 instance that this CloudFormation template will create:
 ```
-aws cloudformation deploy --region $C9_REGION --template-file ./pre-reqs/cfn-c9-desktop.cfn \
-    --stack-name eks-demos-c9-dev-desktop --tags course=coreks,env=training,use=demo
+subnet_id=$(aws ec2 describe-subnets --filters "Name=tag:aws:cloudformation:stack-name,Values=eks-demos-networking" "Name=tag:aws:cloudformation:logical-id,Values=PublicSubnet01" --query "Subnets[].SubnetId" --output text)
+env_id=$(
+  aws cloud9 create-environment-ec2 \
+    --name eks-demos-$(date +"%Y%m%d%H%M") \
+    --instance-type m5.large \
+    --image-id amazonlinux-2-x86_64 \
+    --subnet-id ${subnet_id} \
+    --automatic-stop-time-minutes 1440 \
+    --tags "Key=course,Value=coreks" "Key=env,Value=training" "Key=use,Value=demo" \
+    --query "environmentId" \
+    --output text \
+)
 ```
 #### 2: From a terminal session on the Cloud9 Desktop
 
