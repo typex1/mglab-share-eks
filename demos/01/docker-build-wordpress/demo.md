@@ -16,7 +16,7 @@
   - I can debug it (shell/logs/networking)
   - I can inspect it with dive
 
-#### [Return to Main Readme](https://github.com/virtmerlin/mglab-share-eks#demos)
+#### [Return to Main Readme](https://github.com/bwer432/mglab-share-eks#demos)
 
 ---------------------------------------------------------------
 ---------------------------------------------------------------
@@ -42,7 +42,7 @@ echo $C9_AWS_ACCT
 #### 1: Create Wordpress OCI image & inspect it with dive (! If dockerhub limits your pull during build, please login to dockerhub).
 - Clone the public Docker Wordpress git repo and review the 'Dockerfile' you will use to build the OCI image:
 ```
-cd ~/environment
+pushd ~/environment
 git clone https://github.com/docker-library/wordpress.git
 ```
 - Review the Dockerfile in terminal or text editor:

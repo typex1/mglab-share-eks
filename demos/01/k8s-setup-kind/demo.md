@@ -1,4 +1,4 @@
-## k8s-run-wordpress-minikube
+## k8s-setup-kind
 
 #### GIVEN:
   - A developer desktop with docker & git installed (AWS Cloud9/C9)
@@ -6,8 +6,8 @@
 
 #### WHEN:
   - I install kubectl
-  - I start a minikube k8s cluster running on the Cloud9 IDE instance
-  - I use the kubectl cli to 'apply' the wordpress workload to minikube
+  - I start a KinD (Kubernetes in Docker) k8s cluster running on the Cloud9 IDE instance
+  - I use the kubectl cli to 'apply' the wordpress workload to KinD
 
 #### THEN:
   - I will get wordpress running locally on a local deployment of kubernetes on the Cloud9 IDE instance
@@ -36,7 +36,7 @@
 #### 0: Reset Cloud9 Instance environ from previous demo(s).
 - Reset your region & AWS account variables in case you launched a new terminal session:
 ```
-cd ~/environment/mglab-share-eks/demos/01/k8s-run-wordpress-minikube/
+cd ~/environment/mglab-share-eks/demos/01/k8s-setup-kind/
 export C9_REGION=$(curl --silent http://169.254.169.254/latest/dynamic/instance-identity/document |  grep region | awk -F '"' '{print$4}')
 export C9_AWS_ACCT=$(curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | grep accountId | awk -F '"' '{print$4}')
 clear
@@ -44,13 +44,43 @@ echo $C9_REGION
 echo $C9_AWS_ACCT
 ```
 
-#### 1: Deploy a Kubernetes cluster (minikube) on Cloud9 instance.
-- Install minikube CLI & launch K8s cluster:
+#### 1: Deploy a Kubernetes cluster (kind) on Cloud9 instance.
+- Install Kubernetes in Docker (kind)
 ```
-curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-sudo install minikube-linux-amd64 /usr/local/bin/minikube
-minikube start
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
+chmod +x ./kind
+sudo mv ./kind /usr/local/bin/kind
 ```
+
+- Create your first cluster
+ 
+Your next task is to create a multi-node Kubernetes cluster. Simply typing kind create cluster would create a one node cluster. Please do not do that now.
+
+Most Kubernetes clusters are composed of multiple compute resources. These are referred to as nodes and they come in a couple of varieties, as follows.
+
+**control plane nodes** -- a set of servers that provide container orchestration support features (like a queen bee of a hive or the government of a town/city)
+**data plane nodes** -- a set of servers that run the container workloads; these servers are container hosts, sometimes called workers, like the worker bees in a colony, or the populace of a town/city. Each data plane node hosts an OCI compliant container runtime. This could be the Docker runtime or any alternative (e.g. containerd) capable of running OCI compliant containers. From the abstracted perspective of a Kubernetes user, the choice of underlying container runtime is of no great significance.
+The kind documentation provides a suggested configuration manifest for multi-node clusters. You can use such a file to create your multi-node Kubernetes cluster based on kind. Your cluster can have multiple worker nodes that are separate from the control plane node(s).
+
+- Create a Kubernetes cluster manifest file.
+```
+cat <<EOF >four-node-cluster.yaml
+# four node (three workers) cluster config
+kind: Cluster            # this file describes the Kubernetes infrastructure -- a "cluster" 
+apiVersion: kind.x-k8s.io/v1alpha4
+name: kind               # this is a default for Kubernetes-in-Docker (KinD), but be explicit
+nodes:                   # the nodes are the host servers that implement your Kubernetes cluster
+- role: control-plane    # one control plane node offers no redundancy for high availability
+- role: worker           # each worker node can run your container workloads
+- role: worker           # multiple workers is good practice and offers protection from node failures
+- role: worker
+EOF
+```
+- Create your four node cluster.
+```
+kind create cluster --config ~/environment/000-four-node-cluster.yaml
+```
+
 - Install kubectl CLI:
 ```
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -60,10 +90,6 @@ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 ```
 
 #### 2: Validate the minikube k8s cluster is up.
-- Create/Update kubeconfig context for minikube:
-```
-minikube update-context
-```
 - Use kubectl to get a list of 'context's:
 ```
 kubectl config get-contexts
@@ -198,11 +224,7 @@ kubectl -n wordpress rollout undo deployment.v1.apps/wordpress --to-revision=1
 kubectl get deployment.v1.apps/wordpress -n wordpress -o yaml | grep image:
 kubectl get rs -n wordpress
 ```
-#### 8: Minikube stop.
-- Stop minikube so it won't drag resources on the Cloud9 IDE instance:
-```
-minikube stop
-```
+
 ---------------------------------------------------------------
 ---------------------------------------------------------------
 ### DEPENDENTS
