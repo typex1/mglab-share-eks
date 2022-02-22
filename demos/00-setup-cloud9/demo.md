@@ -15,7 +15,7 @@
 #### SO THAT:
   - I can run demos from this repo on the Cloud9 IDE instance
 
-#### [Return to Main Readme](https://github.com/virtmerlin/mglab-share-eks#demos)
+#### [Return to Main Readme](https://github.com/bwer432/mglab-share-eks#demos)
 
 ---------------------------------------------------------------
 ---------------------------------------------------------------
@@ -36,7 +36,7 @@ cd demos/00-setup-cloud9
 ```
 ```
 aws cloudformation deploy --region $C9_REGION --template-file ./pre-reqs/cfn-amazon-eks-vpc-private-subnets.cfn \
-    --stack-name eks-demos-networking --tags CLASS=EKS
+    --stack-name eks-demos-networking --tags course=coreks,env=training,use=demo
 ```
 
 - From your bash capable mac/pc, create an EC2 Instance Profile that will allow SSM to manage the Cloud9 Instance:
@@ -47,13 +47,13 @@ if [ "$C9_IAM_SSM" == "AWSCloud9SSMInstanceProfile"  ]; then
 else
   echo "Cloud9 SSM Instance Profile Does not exist, will create it now ..."
   aws cloudformation deploy --region $C9_REGION --template-file ./pre-reqs/cfn-c9-instance-ssm-role.cfn \
-      --stack-name mglab-demos-c9-ssm-instance-role --capabilities CAPABILITY_NAMED_IAM --tags CLASS=ALL
+      --stack-name mglab-demos-c9-ssm-instance-role --capabilities CAPABILITY_NAMED_IAM --tags class=all
 fi
 ```
 - From your bash capable mac/pc, create/update a Cloud9 (C9) Instance within the new VPC. You will run all subsequent demo steps after this one from a console on the C9 instance that this CloudFormation template will create:
 ```
 aws cloudformation deploy --region $C9_REGION --template-file ./pre-reqs/cfn-c9-desktop.cfn \
-    --stack-name eks-demos-c9-dev-desktop --tags CLASS=EKS
+    --stack-name eks-demos-c9-dev-desktop --tags course=coreks,env=training,use=demo
 ```
 #### 2: From a terminal session on the Cloud9 Desktop
 
@@ -63,8 +63,8 @@ aws cloudformation deploy --region $C9_REGION --template-file ./pre-reqs/cfn-c9-
 ```
 cd ~/environment
 git config --global user.name "demo user"
-git config --global user.email demo@virtmerlin.io
-if [ ! -d mglab-share-eks ]; then git clone https://github.com/virtmerlin/mglab-share-eks.git; fi
+git config --global user.email demo@bwer432.io
+if [ ! -d mglab-share-eks ]; then git clone https://github.com/bwer432/mglab-share-eks.git; fi
 chmod 755 ./mglab-share-eks/demos/00-setup-cloud9/pre-reqs/resize.sh
 ./mglab-share-eks/demos/00-setup-cloud9/pre-reqs/resize.sh
 ```
