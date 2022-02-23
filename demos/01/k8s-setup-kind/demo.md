@@ -78,7 +78,7 @@ EOF
 ```
 - Create your four node cluster.
 ```
-kind create cluster --config ~/environment/000-four-node-cluster.yaml
+kind create cluster --config ~/environment/four-node-cluster.yaml
 ```
 
 - Install kubectl CLI:
@@ -112,6 +112,10 @@ kubectl create ns wordpress
 ```
 kubectl create configmap wordpress-config -n wordpress --from-literal=database=wordpress
 kubectl get cm wordpress-config -n wordpress -o yaml
+```
+- Copy container image into `kind` environment:
+```
+kind load docker-image eks-demo-wordpress
 ```
 - Create K8s secret to stash the Wordpress database credential variables:
 ```
