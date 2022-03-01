@@ -113,9 +113,14 @@ kubectl create ns wordpress
 kubectl create configmap wordpress-config -n wordpress --from-literal=database=wordpress
 kubectl get cm wordpress-config -n wordpress -o yaml
 ```
-- Copy container image into `kind` environment:
+- Copy recently built wordpress container image into `kind` environment:
 ```
 kind load docker-image eks-demo-wordpress
+- Pull mysql image and copy into `kind` environment:
+```
+docker pull mysql:5.6
+docker tag mysql:5.6 eks-demo-mysql:5.6
+kind load docker-image eks-demo-mysql:5.6
 ```
 - Create K8s secret to stash the Wordpress database credential variables:
 ```

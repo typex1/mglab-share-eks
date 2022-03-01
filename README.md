@@ -48,6 +48,7 @@ EKS Module | Demo Name     | Demo Link     | Last Automated Test Timestamp
 00| setup-cloud9     | [link](demos/00-setup-cloud9/demo.md)   | Manual 10-18-2021
 01| docker-build-wordpress     | [link](demos/01/docker-build-wordpress/demo.md)   | Manual 10-18-2021
 01| k8s-run-wordpress-minikube     | [link](demos/01/k8s-run-wordpress-minikube/demo.md)   | Manual 10-18-2021
+01| k8s-setup-kind     | [link](demos/01/k8s-setup-kind/demo.md)   | Manual 03-01-2022
 02| create-cluster-eksctl-one-liner     | [link](demos/02/create-cluster-eksctl-one-liner/demo.md)   | Manual 10-18-2021
 03| create-cluster-eksctl-existing-vpc-advanced     | [link](demos/03/create-cluster-eksctl-existing-vpc-advanced/demo.md)   | Manual 10-18-2021
 03| create-cluster-terraform     | [link](demos/03/create-cluster-terraform/demo.md)   | Manual 10-18-2021
