@@ -141,8 +141,8 @@ kubectl describe sa $S3_SERVICE_ACCOUNT -n spinnaker
 export ECR_REPOSITORY=eks-workshop-demo/test-detail
 export APP_VERSION=1.0
 aws ecr get-login-password --region $EKS_REGION | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$EKS_REGION.amazonaws.com
-aws ecr describe-repositories --repository-name $ECR_REPOSITORY >/dev/null 2>&1 || \
-  aws ecr create-repository --repository-name $ECR_REPOSITORY >/dev/null
+aws ecr describe-repositories --repository-name $ECR_REPOSITORY --region $EKS_REGION >/dev/null 2>&1 || \
+  aws ecr create-repository --repository-name $ECR_REPOSITORY --region $EKS_REGION >/dev/null
 TARGET=$ACCOUNT_ID.dkr.ecr.$EKS_REGION.amazonaws.com/$ECR_REPOSITORY:$APP_VERSION
 docker pull nginx
 docker tag nginx $TARGET
@@ -189,7 +189,8 @@ export CONTEXT=$(kubectl config current-context)
 export SOURCE_KUBECONFIG=${HOME}/.kube/config
 export SPINNAKER_NAMESPACE="spinnaker"
 export SPINNAKER_SERVICE_ACCOUNT_NAME="spinnaker-ws-sa"
-export DEST_KUBECONFIG=${HOME}/Kubeconfig-ws-saecho $CONTEXT
+export DEST_KUBECONFIG=${HOME}/Kubeconfig-ws-sa
+echo $CONTEXT
 echo $SOURCE_KUBECONFIG
 echo $SPINNAKER_NAMESPACE
 echo $SPINNAKER_SERVICE_ACCOUNT_NAME
@@ -224,7 +225,7 @@ spec:
         s3:
           bucket: $S3_BUCKET
           rootFolder: front50
-          region: $AWS_REGION
+          region: $EKS_REGION
       deploymentEnvironment:
         sidecars:
           spin-clouddriver:
@@ -241,7 +242,7 @@ spec:
           enabled: true
           accounts:
           - name: $GITHUB_USER
-            token: $GITHUB_TOKEN  # GitHub's personal access token. This fields supports `encrypted` references to secrets.
+            token: $GITHUB_TOKEN  # GitHub's personal access token. This fields supports "encrypted" references to secrets.
       providers:
             dockerRegistry:
               enabled: true
@@ -276,7 +277,7 @@ spec:
             primaryAccount: my-ecr-registry
             accounts:
             - name: my-ecr-registry
-              address: https://$ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+              address: https://$ACCOUNT_ID.dkr.ecr.$EKS_REGION.amazonaws.com
               username: AWS
               passwordFile: /etc/passwords/my-ecr-registry.pass
               trackDigests: true
@@ -301,6 +302,7 @@ EOF
 
 #### 15. Configure SpinnakerService account 
 ```
+cat $DEST_KUBECONFIG
 vi deploy/spinnaker/basic/spinnakerservice.yml
 # Replace the <REPLACE_ME_WITH_FILE_CONTENT> in the above section of deploy/spinnaker/basic/spinnakerservice.yml with the kubeconfig content from ${HOME}/Kubeconfig-ws-sa.
 # From the terminal, Go to ${HOME}/Kubeconfig-ws-sa (in my case it was /home/ec2-user/Kubeconfig-ws-sa) and copy the kubeconfig text starting from “apiVersion…” to the end of file.
@@ -313,7 +315,7 @@ vi deploy/spinnaker/basic/spinnakerservice.yml
 #### 16. Confirm environment variables
 ```
 echo $ACCOUNT_ID
-echo $AWS_REGION
+echo $EKS_REGION
 echo $SPINNAKER_VERSION
 echo $GITHUB_USER
 echo $GITHUB_TOKEN
@@ -333,6 +335,8 @@ envsubst < deploy/spinnaker/basic/spinnakerservice.yml | kubectl -n spinnaker ap
 kubectl get svc,pod -n spinnaker
 # Watch the install progress.
 kubectl -n spinnaker get spinsvc spinnaker -w
+kubectl logs deploy/spinnaker-operator -n spinnaker-operator -c halyard
+kubectl logs deploy/spinnaker-operator -n spinnaker-operator -c spinnaker-operator
 ```
 
 ---------------------------------------------------------------
