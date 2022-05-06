@@ -103,10 +103,11 @@ export SPINNAKER_VERSION=1.26.6
 #### 6. Configure Amazon S3 artifacts
 ```
 export S3_BUCKET=spinnaker-workshop-$(cat /dev/urandom | LC_ALL=C tr -dc "[:alpha:]" | tr '[:upper:]' '[:lower:]' | head -c 10)
-aws s3 mb s3://$S3_BUCKET
+aws s3 mb s3://$S3_BUCKET --region $EKS_REGION
 aws s3api put-public-access-block \
 --bucket $S3_BUCKET \
---public-access-block-configuration "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true"
+--public-access-block-configuration "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true" \
+--region $EKS_REGION
 echo $S3_BUCKET
 ```
 
@@ -208,10 +209,16 @@ echo $DEST_KUBECONFIG
 ```
 
 #### 15. Set up SpinnakerService account manifest
+- Could use spinnaker-service.yml from any of spinnaker-operator/deploy/spinnaker/:
+  - basic
+  - complete
+  - kustomize
+- However, here we cook our own.
 ```
-cd spinnaker-operator
-mv deploy/spinnaker/basic/spinnakerservice.yml ./backup-basic-spinnaker-service.yaml
-cat <<EOF >deploy/spinnaker/basic/spinnakerservice.yml
+# cd spinnaker-operator
+# mv deploy/spinnaker/basic/spinnakerservice.yml ./backup-basic-spinnaker-service.yaml
+# cat <<EOF >deploy/spinnaker/basic/spinnakerservice.yml
+cat <<EOF >spinnakerservice.yml
 apiVersion: spinnaker.io/v1alpha2
 kind: SpinnakerService
 metadata:
@@ -269,7 +276,9 @@ spec:
               primaryAccount: spinnaker-workshop  # Change to a desired account from the accounts array
     files: 
         kubeconfig-sp: |
-            <REPLACE_ME_WITH_FILE_CONTENT>
+$(awk ' {print "            "$0}' <$DEST_KUBECONFIG)
+            # <REPLACE_ME_WITH_FILE_CONTENT>
+            # ~/Kubeconfig-ws-sa
     profiles:
         clouddriver:
           dockerRegistry:
@@ -302,12 +311,13 @@ EOF
 
 #### 15. Configure SpinnakerService account 
 ```
-cat $DEST_KUBECONFIG
-vi deploy/spinnaker/basic/spinnakerservice.yml
 # Replace the <REPLACE_ME_WITH_FILE_CONTENT> in the above section of deploy/spinnaker/basic/spinnakerservice.yml with the kubeconfig content from ${HOME}/Kubeconfig-ws-sa.
 # From the terminal, Go to ${HOME}/Kubeconfig-ws-sa (in my case it was /home/ec2-user/Kubeconfig-ws-sa) and copy the kubeconfig text starting from “apiVersion…” to the end of file.
 # Align the tab of the added file content to look as below
+# This should now have been done automatically by the use of awk in the prior shell snippet.
 # Verify the Spinnaker manifest
+cat $DEST_KUBECONFIG
+vi deploy/spinnaker/basic/spinnakerservice.yml
 # By now we have completed our configuration for Spinnaker, and the SpinnakerService manifest located at deploy/spinnaker/basic/spinnakerservice.yml should look similar to below.
 # Note: “$$$” in the YAML below is just a placeholder. Do not copy the content under “kubeconfig-sp:” in this file. Copy the content from ${HOME}/Kubeconfig-ws-sa to this section.
 ```
@@ -325,8 +335,11 @@ echo $ECR_REPOSITORY
 ```
 
 #### 17. Install Spinnaker
+- We have already substituted variables and files by using cat earlier,
+- so we don't need to use envsubst here. Just apply the custom manifest.
 ```
-envsubst < deploy/spinnaker/basic/spinnakerservice.yml | kubectl -n spinnaker apply -f -
+# envsubst < deploy/spinnaker/basic/spinnakerservice.yml | kubectl -n spinnaker apply -f -
+kubectl -n spinnaker apply -f spinnakerservice.yml 
 ```
 
 #### 18. Wait for services to be created

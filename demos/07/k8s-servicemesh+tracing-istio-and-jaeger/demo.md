@@ -65,6 +65,7 @@ istioctl verify-install
 
 #### 2: Deploy 'Book Info' Sample Application that has been instrumented with Zipkin
 - Create Namespace & enable envoy inection:
+- [Book Info app](https://istio.io/latest/docs/examples/bookinfo/)
 ```
 kubectl create namespace istio-bookinfo
 kubectl label namespace istio-bookinfo istio-injection=enabled
