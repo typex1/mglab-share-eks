@@ -65,6 +65,8 @@ kubectl port-forward svc/sloop 8080:80
 - Perform some activities to generate changes in the cluster state - launching deployments, deleting deployments or services, etc.
 - Try making some changes to objects
 - Observe that Sloop is now recording history of all k8s objects, and provides a diff view where changes have been made to existing objects.
+- Enter query parameters on the left, and click Submit Query button
+- Click on any resource in the timeline and select a "left payload" and a "right payload" to observe the differences.
 
 
 ---------------------------------------------------------------
