@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: frontend
+  name: frontend
+spec:
+  containers:
+  - image: 042617493216.dkr.ecr.us-east-2.amazonaws.com/ecsdemo/frontend
+    name: frontend

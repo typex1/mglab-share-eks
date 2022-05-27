@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: frontend
+  name: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+      name: frontend
+    spec:
+      containers:
+      - image: 042617493216.dkr.ecr.us-east-2.amazonaws.com/ecsdemo/frontend
