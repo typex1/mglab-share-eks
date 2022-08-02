@@ -43,7 +43,7 @@ SO THAT:
         ---> Open IDE to exec all remaining demo commands within the C9 desktop
 
         cd ~/environment
-        if [ ! -d mglab-share-eks ]; then git clone https://github.com/virtmerlin/mglab-share-eks.git; fi
+        if [ ! -d mglab-share-eks ]; then git clone https://github.com/bwer432/mglab-share-eks.git; fi
         chmod 755 ./mglab-share-eks/demos/01-docker-build-wordpress/pre-reqs/resize.sh
         ./mglab-share-eks/demos/01-docker-build-wordpress/pre-reqs/resize.sh
         export C9_REGION=$(curl --silent http://169.254.169.254/latest/dynamic/instance-identity/document |  grep region | awk -F '"' '{print$4}')

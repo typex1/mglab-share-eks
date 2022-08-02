@@ -13,7 +13,7 @@
 #### SO THAT:
   - I can see how the kubeproxy uses iptables to load distribute to pods
 
-#### [Return to Main Readme](https://github.com/virtmerlin/mglab-share-eks#demos)
+#### [Return to Main Readme](https://github.com/bwer432/mglab-share-eks#demos)
 
 ---------------------------------------------------------------
 ---------------------------------------------------------------

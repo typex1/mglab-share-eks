@@ -19,7 +19,7 @@
   - I can push the helm chart up to ECR (OCI)
   - I can deploy a nginx workload using the helm chart I just pushed up to ECR
 
-#### [Return to Main Readme](https://github.com/virtmerlin/mglab-share-eks#demos)
+#### [Return to Main Readme](https://github.com/bwer432/mglab-share-eks#demos)
 
 ---------------------------------------------------------------
 ---------------------------------------------------------------

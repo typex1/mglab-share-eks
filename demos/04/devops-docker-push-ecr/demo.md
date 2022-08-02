@@ -19,7 +19,7 @@
   - I can scan the image for CVEs with Clair in ECR
   - I can deploy Wordpress using the image I just pushed to ECR
 
-#### [Return to Main Readme](https://github.com/virtmerlin/mglab-share-eks#demos)
+#### [Return to Main Readme](https://github.com/bwer432/mglab-share-eks#demos)
 
 ---------------------------------------------------------------
 ---------------------------------------------------------------

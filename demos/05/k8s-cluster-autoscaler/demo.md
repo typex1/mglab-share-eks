@@ -15,7 +15,7 @@
 #### SO THAT:
   - I can see the cluster add nodes when necessary
 
-#### [Return to Main Readme](https://github.com/virtmerlin/mglab-share-eks#demos)
+#### [Return to Main Readme](https://github.com/bwer432/mglab-share-eks#demos)
 
 ---------------------------------------------------------------
 ---------------------------------------------------------------

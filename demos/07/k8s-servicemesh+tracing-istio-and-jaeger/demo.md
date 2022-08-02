@@ -14,7 +14,7 @@
 #### SO THAT:
   - I can see how CNCF service mesh and tracing works on EKS
 
-#### [Return to Main Readme](https://github.com/virtmerlin/mglab-share-eks#demos)
+#### [Return to Main Readme](https://github.com/bwer432/mglab-share-eks#demos)
 
 ---------------------------------------------------------------
 ---------------------------------------------------------------

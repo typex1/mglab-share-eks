@@ -14,7 +14,7 @@
 #### SO THAT:
   - I can deploy a new workload that will use tolerations and affinity to target the spot nodes
 
-#### [Return to Main Readme](https://github.com/virtmerlin/mglab-share-eks#demos)
+#### [Return to Main Readme](https://github.com/bwer432/mglab-share-eks#demos)
 
 ---------------------------------------------------------------
 ---------------------------------------------------------------

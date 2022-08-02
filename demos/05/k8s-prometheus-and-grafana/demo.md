@@ -17,7 +17,7 @@
 #### SO THAT:
   - I can see how to use EKS with CNCF observability tooling
 
-#### [Return to Main Readme](https://github.com/virtmerlin/mglab-share-eks#demos)
+#### [Return to Main Readme](https://github.com/bwer432/mglab-share-eks#demos)
 
 ---------------------------------------------------------------
 ---------------------------------------------------------------

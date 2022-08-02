@@ -25,7 +25,7 @@
   - I can query & visualize metrics for My EKS Control Plane in CloudWatch (cloudwatch prometheus forwarder)
   - I can query & visualize logs for My EKS Control Plane in CloudWatch (control plane logging)
 
-#### [Return to Main Readme](https://github.com/virtmerlin/mglab-share-eks#demos)
+#### [Return to Main Readme](https://github.com/bwer432/mglab-share-eks#demos)
 
 ---------------------------------------------------------------
 ---------------------------------------------------------------

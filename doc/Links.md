@@ -1,6 +1,6 @@
 ## Doc Links
 
-#### [Return to Main Readme](https://github.com/virtmerlin/mglab-share-eks#links)
+#### [Return to Main Readme](https://github.com/bwer432/mglab-share-eks#links)
 
 #### (1) Container & Kubernetes Fundamentals
 

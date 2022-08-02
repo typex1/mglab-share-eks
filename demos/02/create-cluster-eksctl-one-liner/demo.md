@@ -21,7 +21,7 @@
 #### SO THAT:
   - I can see how to create a best practices EKS cluster with a single command line.
 
-#### [Return to Main Readme](https://github.com/virtmerlin/mglab-share-eks#demos)
+#### [Return to Main Readme](https://github.com/bwer432/mglab-share-eks#demos)
 
 ---------------------------------------------------------------
 ---------------------------------------------------------------

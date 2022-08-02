@@ -21,7 +21,7 @@
   - I can run my 2 x tier tv application on Fargate & EC2
   - I can use this cluster for all other 'CNCF' demos that require an EKS cluster
 
-#### [Return to Main Readme](https://github.com/virtmerlin/mglab-share-eks#demos)
+#### [Return to Main Readme](https://github.com/bwer432/mglab-share-eks#demos)
 
 ---------------------------------------------------------------
 ---------------------------------------------------------------

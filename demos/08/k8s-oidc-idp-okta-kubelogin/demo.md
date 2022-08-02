@@ -16,7 +16,7 @@
 #### SO THAT:
   - I can see how onboard a devops team to EKS without assuming an IAM role.
 
-#### [Return to Main Readme](https://github.com/virtmerlin/mglab-share-eks#demos)
+#### [Return to Main Readme](https://github.com/bwer432/mglab-share-eks#demos)
 
 ---------------------------------------------------------------
 ---------------------------------------------------------------

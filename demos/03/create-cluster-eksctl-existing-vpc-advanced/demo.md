@@ -21,7 +21,7 @@
   - I can run my wordpress application on Fargate & EC2
   - Use this cluster for all other demos that require an EKS cluster
 
-#### [Return to Main Readme](https://github.com/virtmerlin/mglab-share-eks#demos)
+#### [Return to Main Readme](https://github.com/bwer432/mglab-share-eks#demos)
 
 ---------------------------------------------------------------
 ---------------------------------------------------------------
@@ -73,8 +73,8 @@ echo $SUBNETS_ALL
 ```
 - Loop through the subnets fetched in the previous step and set the appropriate VPC Subnet tags `kubernetes.io/cluster/[cluster_name],Value=shared`.  The `kubernetes.io/role/[elb|internal-elb]` have already been set via the Cloudformation template that created the VCP.
     - [DOC LINK: VPC Subnet Tagging for EKS](https://aws.amazon.com/premiumsupport/knowledge-center/eks-vpc-subnet-discovery/)
-    - [CFN TAG LINK: Public](https://github.com/virtmerlin/mglab-share-eks/blob/main/demos/00-setup-cloud9/pre-reqs/cfn-amazon-eks-vpc-private-subnets.cfn#L181-L182)
-    - [CFN TAG LINK: Internal](https://github.com/virtmerlin/mglab-share-eks/blob/main/demos/00-setup-cloud9/pre-reqs/cfn-amazon-eks-vpc-private-subnets.cfn#L222-L223)
+    - [CFN TAG LINK: Public](https://github.com/bwer432/mglab-share-eks/blob/main/demos/00-setup-cloud9/pre-reqs/cfn-amazon-eks-vpc-private-subnets.cfn#L181-L182)
+    - [CFN TAG LINK: Internal](https://github.com/bwer432/mglab-share-eks/blob/main/demos/00-setup-cloud9/pre-reqs/cfn-amazon-eks-vpc-private-subnets.cfn#L222-L223)
 
 ```
 for i in $(echo $SUBNETS_ALL | sed "s/,/ /g")

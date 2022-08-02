@@ -21,7 +21,7 @@
   - I can apply a K8s RBAC role to the  K8s 'codebuild' IAM role & allow it to 'kubectl apply' the workload from CodePipeline
   - I can demonstrate what happens if something outside of the pipeline alters the simple pipeline app expected state in the EKS Cluster
 
-#### [Return to Main Readme](https://github.com/virtmerlin/mglab-share-eks#demos)
+#### [Return to Main Readme](https://github.com/bwer432/mglab-share-eks#demos)
 
 ---------------------------------------------------------------
 ---------------------------------------------------------------
