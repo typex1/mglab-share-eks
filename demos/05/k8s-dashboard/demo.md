@@ -47,7 +47,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.5/a
 #### 2: Create an eks-admin service account and cluster role binding
 - This demo will create a service account that grants cluster-admin permissions to the Dashboard.  This is the highest levels of privilege, but will allow you to both visualize and manage the cluster.
 ```
-kubectl apply -f artifacts/esk-admin-service-account.yaml
+kubectl apply -f artifacts/eks-admin-service-account.yaml
 ```
 
 #### 3: Connect to the Dashboard
