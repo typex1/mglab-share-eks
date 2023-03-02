@@ -59,7 +59,7 @@ resource "aws_iam_role_policy_attachment" "cluster-terraform-CloudWatchAgentServ
 resource "aws_eks_node_group" "cluster-terraform-nodegroup-1" {
   cluster_name    = aws_eks_cluster.cluster-terraform.name
   node_group_name = "cluster-terraform-nodegroup-1"
-  version = "1.20"
+  version = "1.24"
   node_role_arn   = aws_iam_role.cluster-terraform-noderole-1.arn
   subnet_ids      = aws_subnet.priv[*].id
 

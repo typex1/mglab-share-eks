@@ -77,7 +77,7 @@ resource "aws_security_group_rule" "cluster-terraform-ingress-public-https" {
 
 resource "aws_eks_cluster" "cluster-terraform" {
   name     = var.cluster-name
-  version = "1.20"
+  version = "1.24"
   enabled_cluster_log_types = ["api", "audit","authenticator","controllerManager","scheduler"]
   role_arn = aws_iam_role.cluster-terraform-clusterrole.arn
 
