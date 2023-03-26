@@ -192,4 +192,5 @@ eksctl utils write-kubeconfig --cluster cluster-eksctl --region $C9_REGION --aut
 helm delete my-nginx -n default
 rm -rf ~/environment/blah
 rm ~/environment/mglab-share-eks/demos/04/devops-helm-chart-build-push-ecr/artifacts/wordpress*
+
 ```
