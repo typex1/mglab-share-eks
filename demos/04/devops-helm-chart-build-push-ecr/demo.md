@@ -190,4 +190,6 @@ export C9_AWS_ACCT=$(curl -s http://169.254.169.254/latest/dynamic/instance-iden
 aws ecr delete-repository --repository-name demo-nginx-helm --region $C9_REGION --force
 eksctl utils write-kubeconfig --cluster cluster-eksctl --region $C9_REGION --authenticator-role-arn arn:aws:iam::${C9_AWS_ACCT}:role/cluster-eksctl-creator-role
 helm delete my-nginx -n default
+rm -rf ~/environment/blah
+rm ~/environment/mglab-share-eks/demos/04/devops-helm-chart-build-push-ecr/artifacts/wordpress*
 ```
